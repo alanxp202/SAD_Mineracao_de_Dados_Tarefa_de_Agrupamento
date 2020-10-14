@@ -62,7 +62,8 @@ def add_dados():
         ct_oc = 0
 
     new_df['Óbito por COVID-19'] = ct_obtb_covid
-
+    print('\nTabela com os dados agrupados por estado')
+    print(new_df)
 
 #Realiza a normalização dados obtidos no novo DataFrame
 def normaliza_dados():
@@ -75,12 +76,15 @@ add_pessoa_por_estado()
 add_dados()
 tabela_normalizada = normaliza_dados()
 
+print('\nTabela com os dados normalizados')
+print(tabela_normalizada)
+
 def k_means():
     
     kmeans = KMeans(n_clusters=3).fit(tabela_normalizada)
     centroids = kmeans.cluster_centers_
     
-    print('Os melhores centroides serão:')
+    print('\nOs melhores centroides serão:')
     print(pd.DataFrame(centroids))
 
     plt.scatter(tabela_normalizada['Pessoas'], tabela_normalizada['Óbito por COVID-19'], c= kmeans.labels_.astype(float), s=100, alpha=0.5)
